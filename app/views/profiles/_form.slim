@@ -46,7 +46,7 @@ hr class="colorgraph"
     = f.fields_for :educations do |e|
       div class="education"
         div class="form-group"
-          = e.select(:school_type, ['High School', 'Undergraduate', 'Graduate'],{prompt:'School Type'},{:class=>"form-control input-lg school-type"})
+          = e.select(:school_type, ['Undergraduate', 'Graduate'],{prompt:'School Program'},{:class=>"form-control input-lg school-type"})
 
         div class="form-group"
           =e.autocomplete_field :name, autocomplete_education_name_profiles_path, class:"form-control input-lg school-name", placeholder: "School Name"
@@ -112,10 +112,6 @@ javascript:
         if($(this).val() == 'false')
           $(this).parents('.experience').children('.end-date').show();
       });
-      $( '.school-type' ).each(function(i) {
-        if($(this).val() == 'High School')
-          $(this).parents('.education').children('.major').hide();
-      });
       var country = $('.country').val().toLowerCase()
       if(country == 'united states'||country == 'usa')
         $('.country').parents('.row').children('.profile-state').show();
@@ -161,19 +157,12 @@ javascript:
       if($(exp.target).val() == 'true')
         $(exp.target).parents('.form-group').next().hide();
     });
-    $('body').on('change', '.school-type', function(schooltype){
-      if($(schooltype.target).val() == 'High School')
-        $(schooltype.target).parents('.education').children('.major').hide();
-      else
-        $(schooltype.target).parents('.education').children('.major').show();
-    });
   });    
 script id='education-template' type='x-tmpl-mustache'
   div class="education"
     div class="form-group"
       select class="form-control input-lg school-type" name="profile[educations_attributes][{{education_index}}][school_type]" id="profile_educations_attributes_{{education_index}}_school_type"
-        option value="" School Type
-        option value="High School" High School
+        option value="" School Program
         option value="Undergraduate" Undergraduate
         option value="Graduate" Graduate
     div class="form-group"
