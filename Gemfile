@@ -38,6 +38,10 @@ gem 'rails_admin'
 gem 'newrelic_rpm'
 #for app rename
 gem 'rename'
+gem 'carrierwave'
+gem 'cloudinary'
+#Pagination
+gem 'kaminari'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

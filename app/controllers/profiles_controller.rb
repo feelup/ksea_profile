@@ -21,7 +21,7 @@ class ProfilesController < ApplicationController
   end
 
 	def index
-    @profiles=Profile.search(params[:search_school_company],params[:search_location])
+    @profiles=Profile.search(params[:search_school_company],params[:search_location]).page(params[:page]).per(24)
   end
 
   def show
@@ -65,6 +65,6 @@ class ProfilesController < ApplicationController
 
   private
     def profile_params
-      params.require(:profile).permit(:first_name, :last_name, :email, :phone, :country, :city, :state, :linkedin_url, :facebook_url, educations_attributes: [:id, :school_type, :name, :end_year, :major, :_destroy], experiences_attributes: [:id, :job_type, :company_name, :title, :country, :city, :start_month, :start_year, :end_month, :end_year, :is_present, :industry, :_destroy])
+      params.require(:profile).permit(:first_name, :last_name, :email, :phone, :country, :city, :state, :linkedin_url, :facebook_url, :image, :affiliation, :title, educations_attributes: [:id, :school_type, :name, :end_year, :major, :_destroy], experiences_attributes: [:id, :job_type, :company_name, :title, :country, :city, :start_month, :start_year, :end_month, :end_year, :is_present, :industry, :_destroy])
     end
 end
