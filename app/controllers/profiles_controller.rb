@@ -21,7 +21,11 @@ class ProfilesController < ApplicationController
   end
 
 	def index
-    @profiles=Profile.order(:first_name).search(params[:search_school_company],params[:search_location]).page(params[:page]).per(24)
+    if current_user.admin? || current_user.profiles.count(:id) > 0
+      @profiles=Profile.order(:first_name).search(params[:search_school_company],params[:search_location]).page(params[:page]).per(24)
+    else
+      redirect_to(new_profile_path)
+    end
   end
 
   def show
@@ -29,9 +33,13 @@ class ProfilesController < ApplicationController
   end
 
   def new
-    @profile = Profile.new
-    @profile.educations.build
-    @profile.experiences.build
+    if current_user.admin? || current_user.profiles.count(:id) == 0
+      @profile = Profile.new
+      @profile.educations.build
+      @profile.experiences.build
+    else
+      redirect_to(edit_profile_path(current_user.profiles.first))
+    end
 	end
 
 	def create
@@ -47,6 +55,9 @@ class ProfilesController < ApplicationController
 
   def edit
     @profile = Profile.find(params[:id])
+    unless current_user == @profile.user || current_user.admin?
+      redirect_to(profile_path)
+    end
   end
 
   def update

@@ -40,11 +40,11 @@ div class="container index-main"
               p class="profile"
                 strong
                   |Alumni:&nbsp
-                = profile.educations.map{|education| education.name}.join(', ').to_s
+                = profile.educations.order(:end_year).map{|education| education.name}.join(', ').to_s
               p class="profile"
                 strong
                   |Jobs:&nbsp
-                = profile.experiences.map{|experience| experience.company_name}.join(', ').to_s
+                = profile.experiences.order(:start_year).map{|experience| experience.company_name}.join(', ').to_s
             div class="profile-links"
               =link_to 'Full Info', profile_path(profile), class: "btn btn-primary-outline btn-sm btn-profile"
               -if current_user.admin?

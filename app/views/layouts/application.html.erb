@@ -21,12 +21,17 @@
               <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
               </li>
-              
-              <% current_user.profiles.each do |profile| %>
+              <% if current_user.profiles.count(:id) > 0 %>
+                <% current_user.profiles.each do |profile| %>
+                  <li class="nav-item">
+                    <%=link_to(edit_profile_path(profile.id), :class => "nav-link") do%>
+                      Edit Profile(<%= profile.first_name%>)
+                    <% end %>
+                  </li>
+                <% end %>
+              <% else %>
                 <li class="nav-item">
-                  <%=link_to(edit_profile_path(profile.id), :class => "nav-link") do%>
-                    Edit <%= profile.first_name%>
-                  <% end %>
+                <%=link_to "Create Your Profile", new_profile_path, :class => "nav-link btn btn-primary-outline"%>
                 </li>
               <% end %>
 
