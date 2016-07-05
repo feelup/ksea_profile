@@ -140,3 +140,7 @@ textarea.input-lg{height:auto;}
 .navbar-toggler{
   color: black!important;
 }
+.profile-links{
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
