@@ -28,6 +28,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Process files as they are uploaded:
   process :convert => 'jpg'
   process :tags => ['profile_pic']
+  cloudinary_transformation :width => 800, :height => 800, :crop => :limit, :gravity => :north
 
   version :standard do
     process :resize_to_fill => [200, 200, :north]

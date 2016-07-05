@@ -21,7 +21,7 @@ class ProfilesController < ApplicationController
   end
 
 	def index
-    @profiles=Profile.order("first_name DESC").search(params[:search_school_company],params[:search_location]).page(params[:page]).per(24)
+    @profiles=Profile.order(:first_name).search(params[:search_school_company],params[:search_location]).page(params[:page]).per(24)
   end
 
   def show
