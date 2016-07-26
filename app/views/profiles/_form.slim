@@ -55,11 +55,11 @@ hr class="colorgraph"
   h2 Education
   hr class="colorgraph"
   div class="education-container"
-    h6 Add all college program including current program.
+    h6 Add all college programs including current program.
     = f.fields_for :educations do |e|
       div class="education"
         div class="form-group"
-          = e.select(:school_type, ['Associate Degree', 'Bachelor Degree', 'Master Degree', 'Doctoral Degree'],{prompt:'Degree Program'},{:class=>"form-control input-lg school-type"})
+          = e.select(:school_type, ["Associate Degree", "Bachelor's Degree", "Master's Degree", 'Doctoral Degree'],{prompt:'Degree Program'},{:class=>"form-control input-lg school-type"})
 
         div class="form-group"
           =e.autocomplete_field :name, autocomplete_education_name_profiles_path, class:"form-control input-lg school-name", placeholder: "School Name"
@@ -78,7 +78,7 @@ hr class="colorgraph"
   h2 Experience
   hr class="colorgraph"
   div class="experience-container"
-    h6 Add all job experience including current job.
+    h6 Add all job experiences including current job.
     = f.fields_for :experiences do |exp|
       div class="experience"
         div class="form-group"
@@ -106,7 +106,7 @@ hr class="colorgraph"
               =exp.text_field :end_year, class:"form-control input-lg", placeholder: "Start Year"
 
         =exp.text_field :_destroy, :value =>0, :class=>'delete_experience', :style=>'display:none;'
-        div class="btn btn-danger btn-block delete-experience-btn" Click to Delete This Experiecne
+        div class="btn btn-danger btn-block delete-experience-btn" Click to Delete This Experience
         
 
   div class="btn btn-primary btn-block" id="add-experience-btn" Click to Add Additional Experience
@@ -178,8 +178,8 @@ script id='education-template' type='x-tmpl-mustache'
       select class="form-control input-lg school-type" name="profile[educations_attributes][{{education_index}}][school_type]" id="profile_educations_attributes_{{education_index}}_school_type"
         option value="" Degree Program
         option value="Associate Degree" Associate Degree
-        option value="Bachelor Degree" Bachelor Degree
-        option value="Master Degree" Master Degree
+        option value="Bachelor Degree" Bachelor's Degree
+        option value="Master Degree" Master's Degree
         option value="Doctoral Degree" Doctoral Degree
     div class="form-group"
       input class="form-control input-lg school-name" placeholder="School Name" data-autocomplete="/profiles/autocomplete_education_name" type="text" name="profile[educations_attributes][{{education_index}}][name]" id="profile_educations_attributes_{{education_index}}_name"
