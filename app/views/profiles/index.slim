@@ -27,7 +27,7 @@ div class="container index-main"
               p class="location"
                 =profile.city
                 |,&nbsp
-                -if profile.state!=nil
+                -if profile.country=='United States'||profile.country=='USA'
                   =profile.state
                 -else
                   =profile.country
