@@ -19,7 +19,17 @@
           <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar2">
             <ul class="nav navbar-nav pull-xs-right">
               <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Event
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <% if current_user.events.count(:id) > 0 %>
+                    <% current_user.events.each do |event| %>
+                      <a class="dropdown-item" href="/"><%= event.name%></a>
+                    <% end %>
+                  <% end %>
+                </div>
               </li>
               <% if current_user.profiles.count(:id) > 0 %>
                 <% current_user.profiles.each do |profile| %>
