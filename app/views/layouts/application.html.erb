@@ -24,13 +24,17 @@
                     <%=@events.name%>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <% if current_user.events.count(:id) > 0 %>
-                    <% current_user.events.each do |event| %>
-                      <%=link_to(event_path(event.id), :class => "dropdown-item") do%>
-                        <%= event.name%></a>
+                    <% if current_user.events.count(:id) > 0 %>
+                      <% current_user.events.each do |event| %>
+                        <%=link_to(event_path(event.id), :class => "dropdown-item") do%>
+                          <%= event.name%>
+                        <% end %>
                       <% end %>
                     <% end %>
-                  <% end %>
+                    <%=link_to(new_attendance_path, :class => "dropdown-item") do%>
+                      Add Event
+                    <% end %>
+                  </div>
                 </div>
               </li>
               <% if current_user.profiles.count(:id) > 0 %>
