@@ -1,0 +1,92 @@
+div class="container-fluid"
+  div class="row seachbar"
+    =form_tag event_path(@event), :method => 'get' do
+      div class="col-xs-5 col-sm-4 col-md-offset-1"
+        =text_field_tag :search_school_company, params[:search_school_company], class:"form-control", placeholder: "Name, School or Company"
+      div class="col-xs-4 col-sm-4"
+        =text_field_tag :search_location, params[:search_location], class:"form-control", placeholder: "Location"
+      div class="col-xs-3 col-sm-4 col-md-2"
+        =submit_tag 'Search', :name=>nil, :class=>"form-control-btn btn btn-primary btn-block"
+div class="container index-main"
+  div class="row"
+    div class="col-xs-12"
+      h1 
+        |List of Participants -&nbsp
+        =@event.name
+        
+      div class="row"
+        - @profiles.each do |profile|
+          div class="col-xs-6 col-sm-4 col-lg-3"
+            div class="profile-box js-equal-height"
+              =image_tag profile.image_url(:standard).to_s, class: "profile-pic"
+              p class="name"
+                =profile.first_name
+                |&nbsp
+                =profile.last_name
+                -if profile.linkedin_url.length!=0
+                  =link_to image_tag("linkedin.png", :class=>'profile-social-img'), profile.linkedin_url, :target => "_blank"
+                -if profile.facebook_url.length!=0
+                  =link_to image_tag("facebook.png",:class=>'profile-social-img'), profile.facebook_url, :target => "_blank"
+              p class="location"
+                =profile.city
+                |,&nbsp
+                -if profile.country=='United States'||profile.country=='USA'
+                  =profile.state
+                -else
+                  =profile.country
+              p class="profile"
+                =profile.title
+                br
+                strong
+                  =profile.affiliation
+
+              p class="profile"
+                strong
+                  |Alumni:&nbsp
+                = profile.educations.order(:end_year).map{|education| education.name}.join(', ').to_s
+              p class="profile"
+                strong
+                  |Jobs:&nbsp
+                = profile.experiences.order(:start_year).map{|experience| experience.company_name}.join(', ').to_s
+            div class="profile-links"
+              =link_to 'Full Info', profile_path(profile.id), class: "btn btn-primary-outline btn-sm btn-profile"
+              -if current_user.admin?
+                =link_to 'Edit', edit_profile_path(profile.id), class: "btn btn-warning-outline btn-sm"
+                =link_to 'Delete', profile_path(profile.id), method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-danger-outline btn-sm"
+  div class="row paginate"
+    = paginate @profiles
+
+javascript:
+  function heightsEqualizer(selector) {
+    var elements = document.querySelectorAll(selector),
+        max_height = 0,
+        len = 0,
+        i;
+ 
+    if ( (elements) && (elements.length > 0) ) {
+        len = elements.length;
+ 
+        for (i = 0; i < len; i++) { // get max height
+      elements[i].style.height = ''; // reset height attr
+            if (elements[i].clientHeight > max_height) {
+                max_height = elements[i].clientHeight;
+            }
+        }
+        for (i = 0; i < len; i++) { // set max height to all elements
+            elements[i].style.height = max_height + 'px';
+        }
+    }
+  }
+   
+  if (document.addEventListener) {
+      document.addEventListener('DOMContentLoaded', function() {
+          heightsEqualizer('.js-equal-height');
+      });
+    window.addEventListener('resize', function(){
+      heightsEqualizer('.js-equal-height');
+    });
+  }
+   
+  setTimeout(function () { // set 1 second timeout for having all fonts loaded
+    heightsEqualizer('.js-equal-height');
+  }, 1000);

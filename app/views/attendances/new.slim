@@ -1,0 +1,19 @@
+div class="container main"
+  div class="row"
+    div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3"
+      div class="row"
+        h2 Select Event
+        hr class="colorgraph"
+        = form_for @attendance do |f|
+          div class="form-group"
+            = select_tag 'attendance[event_id]', options_for_select(@events.collect{|e| [e.name, e.id]}), {:class=>"form-control input-lg school-type"}
+          - if flash[:error]
+            h5 class='error-msg'
+              = flash[:error]
+          div class="form-group"
+            input type="text" name="password" class="form-control input-lg" placeholder="Event Passcode"
+          = f.text_field :user_id, :value => @user.id, :class=>"hide"
+          hr class="colorgraph"
+          div class="row"
+            div class="col-xs-6 col-md-6"
+              =f.submit 'Confirm', :class=>"btn btn-primary btn-block btn-lg"

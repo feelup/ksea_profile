@@ -62,6 +62,10 @@ td{
   vertical-align: middle!important;
 }
 
+.error-msg {
+  color: red;
+}
+
 .form-control {
   display: block;
   width: 100%;

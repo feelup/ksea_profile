@@ -26,13 +26,16 @@ class ProfilesController < ApplicationController
     else
       redirect_to(new_profile_path)
     end
+    list_of_events
   end
 
   def show
+    list_of_events
     @profile = Profile.find(params[:id])
   end
 
   def new
+    list_of_events
     if current_user.admin? || current_user.profiles.count(:id) == 0
       @profile = Profile.new
       @profile.educations.build
@@ -50,21 +53,25 @@ class ProfilesController < ApplicationController
     else
       redirect_to @profile and return
     end
-    redirect_to profiles_path
+    redirect_to root_path
 	end
 
   def edit
+    list_of_events
     @profile = Profile.find(params[:id])
     unless current_user == @profile.user || current_user.admin?
-      redirect_to(profile_path)
+      redirect_to(event_profile_path)
     end
   end
 
   def update
     @profile = Profile.find(params[:id])
     @profile.update_attributes(profile_params)
-
-    render :action => 'edit'
+    if @profile.update(profile_params)
+      redirect_to(event_profile_path(@event.id,@profile.id))
+    else
+      render :action => 'edit'
+    end
   end
 
   def destroy

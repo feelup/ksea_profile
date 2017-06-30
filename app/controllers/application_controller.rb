@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def list_of_events
+  	@user = current_user
+    @has_access_to=Attendance.where(user_id:@user.id).pluck(:event_id)
+    @events=Event.where(id: @has_access_to).order(id: :desc)
+  end
+
   protected
 
   def configure_permitted_parameters

@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
+  get 'attendance/new'
+
+  get 'events/show'
+
   mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
 
   devise_for :users, :controllers => {:registrations => "registrations"}
+  resources :events
   resources :profiles do
-    resources :educations do
-    end
-    resources :experiences do
-    end
+    resources :educations
+    resources :experiences
     get :autocomplete_profile_country, :on => :collection
     get :autocomplete_profile_city, :on => :collection
     get :autocomplete_education_name, :on => :collection
@@ -14,7 +17,8 @@ Rails.application.routes.draw do
     get :autocomplete_experience_company_name, :on => :collection
     get :autocomplete_experience_title, :on => :collection
   end
-  root 'profiles#index'
+  resources :attendances
+  root 'events#latest'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
