@@ -60,7 +60,7 @@ class ProfilesController < ApplicationController
     list_of_events
     @profile = Profile.find(params[:id])
     unless current_user == @profile.user || current_user.admin?
-      redirect_to(event_profile_path)
+      redirect_to profile_path
     end
   end
 
@@ -68,7 +68,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
     @profile.update_attributes(profile_params)
     if @profile.update(profile_params)
-      redirect_to(event_profile_path(@event.id,@profile.id))
+      redirect_to profile_path
     else
       render :action => 'edit'
     end
@@ -78,7 +78,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
     @profile.destroy
     flash[:notice] = "Successfully destroyed profile."
-    redirect_to profiles_path
+    redirect_to root_path
   end
 
   private
