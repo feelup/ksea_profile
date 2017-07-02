@@ -12,23 +12,23 @@ hr class="colorgraph"
     div class="row"
       div class="col-xs-6 col-sm-6 col-md-6"
         div class="form-group"
-          =f.text_field :first_name, class:"form-control input-lg", placeholder: "First Name"
+          =f.text_field :first_name, class:"form-control input-lg", placeholder: "First Name", :required => true
 
       div class="col-xs-6 col-sm-6 col-md-6"
         div class="form-group"
-          =f.text_field :last_name, class:"form-control input-lg", placeholder: "Last Name"
+          =f.text_field :last_name, class:"form-control input-lg", placeholder: "Last Name", :required => true
 
     div class="form-group"
-      =f.text_field :email, class:"form-control input-lg", placeholder: "Email Address"
+      =f.text_field :email, class:"form-control input-lg", placeholder: "Email Address", :required => true
 
     div class="form-group"
-      =f.text_field :phone, class:"form-control input-lg", placeholder: "Phone Number"
+      =f.text_field :phone, class:"form-control input-lg", placeholder: "Phone Number", :required => true
 
     div class="form-group"
-      =f.text_field :affiliation, class:"form-control input-lg", placeholder: "Current Affiliation"
+      =f.text_field :affiliation, class:"form-control input-lg", placeholder: "Current Affiliation", :required => true
 
     div class="form-group"
-      =f.text_field :title, class:"form-control input-lg", placeholder: "Current Title"
+      =f.text_field :title, class:"form-control input-lg", placeholder: "Current Title", :required => true
 
     div class="form-group"
       =f.text_field :linkedin_url, class:"form-control input-lg url", placeholder: "Your LinkedIn Profile Link"
@@ -39,13 +39,13 @@ hr class="colorgraph"
     div class="row"
       div class="col-xs-6 col-sm-6 col-md-6"
         div class="form-group"
-          =f.autocomplete_field :country, autocomplete_profile_country_profiles_path, class:"form-control input-lg country", placeholder: "Country"
+          =f.autocomplete_field :country, autocomplete_profile_country_profiles_path, class:"form-control input-lg country", placeholder: "Country", :required => true
       div class="col-xs-6 col-sm-6 col-md-6"
         div class="form-group"
-          =f.autocomplete_field :city, autocomplete_profile_city_profiles_path, class:"form-control input-lg", placeholder: "City"
+          =f.autocomplete_field :city, autocomplete_profile_city_profiles_path, class:"form-control input-lg", placeholder: "City", :required => true
       div class="col-xs-6 col-sm-6 col-md-6 profile-state hide"
         div class="form-group"
-          =f.select(:state, ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],{prompt:'State'},{:class=>"form-control input-lg school-type"})
+          =f.select(:state, ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'Washington D.C.', 'West Virginia', 'Wisconsin', 'Wyoming'],{prompt:'State'},{:class=>"form-control input-lg school-type"})
     div class="form-group"
       h3 Upload your profile picture.
       h5 It has to be square and at least 200x200
@@ -115,7 +115,7 @@ hr class="colorgraph"
   
   div class="row"
     div class="col-xs-6 col-md-6"
-      =f.submit 'Submit', :class=>"btn btn-primary btn-block btn-lg"
+      =f.submit 'Submit', :class=>"btn btn-primary btn-block btn-lg", data: {disable_with: "Submiting"}
     div class="col-xs-6 col-md-6"
       a href="#" class="btn btn-secondary btn-block btn-lg" Cancel
 
