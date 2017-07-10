@@ -8,7 +8,7 @@ class EventsController < ApplicationController
       @users=@event.users.pluck(:id)
       @profiles=Profile.where(user_id: @users).order(:first_name).search(params[:search_school_company],params[:search_location]).page(params[:page]).per(24)
     else
-      redirect_to(new_profile_path)
+      redirect_to(new_profile_path) and return
     end
     list_of_events
     if !@has_access_to.include?(@event.id)
